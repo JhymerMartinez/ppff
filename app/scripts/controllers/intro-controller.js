@@ -14,7 +14,7 @@
 
     function startApp() {
       $window.localStorage.setItem('hasViewedTutorial','true');
-      $state.go('login');
+      $state.go('prelogin');
     }
 
     function next() {
