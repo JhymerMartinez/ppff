@@ -3,9 +3,9 @@
 
   var express = require('express'),
       app = express(),
-      forceSSL = require('./config/force-ssl.js');;
+      enforce = require('express-sslify');
 
-  app.use(forceSSL());
+  app.use(enforce.HTTPS());
   app.use(express.static('app'));
   app.set('port', process.env.PORT || 5001);
   app.listen(app.get('port'), function () {
