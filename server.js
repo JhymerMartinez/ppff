@@ -5,7 +5,7 @@
       app = express();
 
   // Force use SSL
-  if (process.env.FORCE_HTTPS) {
+  if (!!process.env.FORCE_HTTPS) {
     var enforce = require('express-sslify');
     app.use(enforce.HTTPS({ trustProtoHeader: true }));
   }
