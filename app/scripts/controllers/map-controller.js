@@ -27,7 +27,7 @@
         $ionicLoading.hide();
         $ionicPopup.alert({
           title: 'Error',
-          template: 'Hubo un error al cargar el mapa.</br>' + err
+          template: 'Hubo un error al cargar el mapa.</br>' + JSON.stringify(err)
         });
       });
 
