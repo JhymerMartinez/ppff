@@ -13,4 +13,3 @@ plugins
 *.DS_Store
 
 app/scripts/config/constants-config.js
-app/templates/**/*.html
