@@ -1,6 +1,8 @@
 .logo {
-  @include background-centered('../images/logo_color.png', 232px, 123px);
+  @include background-centered('../images/logo_color.png');
+  height: 125px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .form-container {
@@ -23,7 +25,7 @@
 .button-login, .facebook-login {
   @extend .common-button;
   font-family: Montserrat-Light;
-  background-color: $background-base-yellow;
+  background-color: $base-yellow;
   margin-top: 20px;
   color: $white;
   width: 100%;
@@ -38,5 +40,5 @@
 }
 
 .input-facebook-login {
-  padding-left: 40px;
+  padding-left: 30px;
 }

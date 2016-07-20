@@ -1,6 +1,7 @@
+@import "../bower_components/ionic/scss/_variables";
+
 @import "fonts/fonts";
 @import "colors/colors";
-@import "common/variables";
 @import "common/styles";
 @import "common/mixins";
 
@@ -9,4 +10,6 @@
 @import "register";
 @import "map/map";
 @import "reset/send";
+@import "reset/reset";
+@import "overrides/bar-header";
 @import "directives/back-button"
