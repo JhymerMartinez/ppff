@@ -2,15 +2,16 @@ ion-view(
   view-title="Ubicación"
 )
   ion-content
-    input(
-      id="input-places"
-      class="controls"
-      type="text"
-      placeholder="Introduzca una ubicación"
-      ng-autocomplete
-      ng-focus="mapVm.disableTap()"
-    )
-    div(
-      id="map"
-      data-tap-disabled="true"
-    )
+    .map-view
+      input(
+        id="input-places"
+        class="controls"
+        type="text"
+        placeholder="Introduzca una ubicación"
+        ng-autocomplete
+        ng-focus="mapVm.disableTap()"
+      )
+      div(
+        id="map"
+        data-tap-disabled="true"
+      )
