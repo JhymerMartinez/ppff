@@ -23,11 +23,11 @@
         $ionicLoading.hide();
 
       },
-      function error(err) {
+      function error() {
         $ionicLoading.hide();
         $ionicPopup.alert({
           title: 'Error',
-          template: 'Hubo un error al cargar el mapa.</br>' + JSON.stringify(err)
+          template: 'Hubo un error al cargar el mapa.'
         });
       });
 
