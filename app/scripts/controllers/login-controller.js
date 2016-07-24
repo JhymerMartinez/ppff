@@ -11,12 +11,11 @@
                             $ionicLoading,
                             $ionicPopup,
                             $auth,
-                            $ionicHistory,
-                            LoginService) {
+                            $ionicHistory) {
     var loginVm = this;
     loginVm.login = login;
     loginVm.logout = logout;
-    loginVm.loginWithFB = LoginService.loginWithFB;
+    loginVm.loginWithFB = loginWithFB;
     loginVm.loginForm = {};
     var successState = 'app.playlists';
     var loginState = 'login';
@@ -70,6 +69,19 @@
         })
         .finally(function () {
           $ionicLoading.hide();
+        });
+    }
+
+    function loginWithFB() {
+      $auth.authenticate('facebook')
+        .then(function () {
+          $state.go(successState);
+        })
+        .catch(function () {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Hubo un error, intentalo nuevamente.'
+          });
         });
     }
   }
