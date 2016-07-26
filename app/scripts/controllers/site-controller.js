@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('SiteController', SiteController);
 
-  function SiteController($rootScope, $ionicLoading, $auth, $state) {
+  function SiteController($rootScope, $ionicLoading, $auth, $state, $location) {
 
     $rootScope.$on('$stateChangeStart', function(){
       $ionicLoading.show({
@@ -16,6 +16,7 @@
     $rootScope.$on('$stateChangeSuccess', function(){
       // Check if user is authenticated
       if (!$state.includes('app')) {
+        var test = $location;
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
