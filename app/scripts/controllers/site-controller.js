@@ -21,9 +21,7 @@
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
-            $state.go('app.playlists');
-            var reditectTo = window.location.origin + window.location.pathname + $state.href('app.playlists')
-            $window.location.href = reditectTo;
+            $window.location.href = reditectTo('app.playlists');
         })
           .catch(function () {
             $ionicLoading.hide();
@@ -36,6 +34,12 @@
     $rootScope.$on('$stateChangeError', function(){
       $ionicLoading.hide();
     });
+
+    function reditectTo(stateName) {
+       return $window.location.origin +
+        $window.location.pathname +
+        $state.href(stateName);
+    }
 
   }
 })();
