@@ -21,7 +21,8 @@
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
-            $window.location.href = reditectTo('app.playlists');
+            $state.go('app.playlists');
+            //$window.location.href = reditectTo('app.playlists');
         })
           .catch(function () {
             $ionicLoading.hide();

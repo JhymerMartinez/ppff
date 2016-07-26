@@ -26,7 +26,7 @@
     });
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
 
     .state('login', {
@@ -138,6 +138,9 @@
         return '/prelogin';
       }
     });
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 
     function isResetPassword(href) {
       var param = href.match(/reset_password=([^&]+)/);
