@@ -2,14 +2,17 @@
 
 @import "fonts/fonts";
 @import "colors/colors";
-@import "common/styles";
+@import "common/rows";
 @import "common/mixins";
+@import "common/inputs";
+@import "common/buttons";
+@import "common/bar-footer";
+@import "common/input_icons";
 
 @import "intro";
 @import "login";
 @import "register";
 @import "map/map";
-@import "reset/send";
-@import "reset/reset";
+@import "overrides/scroll";
 @import "overrides/bar-header";
 @import "directives/back-button"
