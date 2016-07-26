@@ -26,7 +26,8 @@
     });
   })
 
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
+    debugger;
     $stateProvider
 
     .state('login', {
@@ -75,6 +76,7 @@
       //only logged users will allow to go to /app/*
       resolve: {
           currentUser: function($auth, $state) {
+            debugger;
             $auth.validateUser().then(function(user){
               return user;
             }, function(){
@@ -132,15 +134,13 @@
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise(function ($injector, $location) {
+      debugger;
       if (isResetPassword($location.absUrl())) {
         return '/reset';
       } else {
         return '/prelogin';
       }
     });
-
-    // use the HTML5 History API
-    $locationProvider.html5Mode(true);
 
     function isResetPassword(href) {
       var param = href.match(/reset_password=([^&]+)/);
