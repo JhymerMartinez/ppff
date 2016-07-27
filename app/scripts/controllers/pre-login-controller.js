@@ -9,9 +9,9 @@ function PreController($auth, $state, $ionicPopup, $window, LoginService, $rootS
   preVm.loginWithFB = LoginService.loginWithFB;
   var successState = 'app.playlists';
 
-    $rootScope.$on('auth:login-success', function(ev, user) {
+/*    $rootScope.$on('auth:login-success', function(ev, user) {
        debugger;
-    });
+    });*/
 
   function load(){
     if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {

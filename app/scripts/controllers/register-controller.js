@@ -17,9 +17,9 @@
     registerVm.registerForm = {};
     registerVm.loginWithFB = LoginService.loginWithFB;
 
-    $rootScope.$on('auth:login-success', function(ev, user) {
+/*    $rootScope.$on('auth:login-success', function(ev, user) {
        debugger;
-    });
+    });*/
 
     function register() {
       $ionicLoading.show({
