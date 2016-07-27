@@ -25,7 +25,7 @@
           .then(function(){
             $ionicLoading.hide();
             //$state.go('app.playlists');
-            $window.location.href = reditectTo('app.playlists');
+            window.location.href = reditectTo('app.playlists');
         })
           .catch(function () {
             $ionicLoading.hide();
@@ -42,8 +42,8 @@
 
     function reditectTo(stateName) {
       debugger;
-       return $window.location.origin +
-        $window.location.pathname +
+       return window.location.origin +
+        window.location.pathname +
         $state.href(stateName);
     }
 
