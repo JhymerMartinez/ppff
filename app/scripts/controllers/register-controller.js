@@ -10,7 +10,8 @@
                               $ionicPopup,
                               $state,
                               $scope,
-                              LoginService) {
+                              LoginService,
+                              $rootScope) {
     var registerVm = this;
     registerVm.register = register;
     registerVm.registerForm = {};

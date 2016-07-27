@@ -4,7 +4,7 @@ angular
   .module('porttare.controllers')
   .controller('PreController', PreController);
 
-function PreController($auth, $state, $ionicPopup, $window, LoginService) {
+function PreController($auth, $state, $ionicPopup, $window, LoginService, $rootScope) {
   var preVm = this;
   preVm.loginWithFB = LoginService.loginWithFB;
   var successState = 'app.playlists';
