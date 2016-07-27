@@ -25,7 +25,8 @@
           .then(function(){
             $ionicLoading.hide();
             //$state.go('app.playlists');
-            $window.location = $state.href('app.playlists');
+            //$window.location = $state.href('app.playlists');
+            $location.url($state.href('app.playlists'));
         })
           .catch(function () {
             $ionicLoading.hide();
