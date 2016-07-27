@@ -25,6 +25,10 @@
       $state.go(successState);
     });
 
+    $rootScope.$on('auth:login-success', function(ev, user) {
+       debugger;
+    });
+
     function load(){
       $auth.validateUser().then(function(){
         $state.go(successState);
