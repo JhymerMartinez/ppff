@@ -17,7 +17,7 @@
 
     $rootScope.$on('$stateChangeSuccess', function(){
       // Check if user is authenticated
-      if (!$state.includes('app')) {
+      if (!$state.includes('app') && !$state.is('reset')) {
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
