@@ -69,6 +69,12 @@
       controller: 'PreController',
       controllerAs: 'preVm'
     })
+    .state('error', {
+      url: '/error',
+      controller: 'LoginController',
+      controllerAs: 'loginVm',
+      template: '<h1>error</h1>'
+    })
 
     .state('app', {
       url: '/app',
