@@ -1,0 +1,18 @@
+ion-view(
+  view-title="{{:: categoryVm.categoryName}}"
+)
+  ion-nav-title
+    .alt-logo
+  ion-content(class="category-page",
+    style="background-image: url('{{categoryVm.category.imagen}}')"
+  )
+    .category-title {{categoryVm.category.titulo | uppercase}}
+    .category-description {{categoryVm.category.descripcion}}
+    slick(settings="categoryVm.slickConfig")
+      .slick-container(ng-repeat="provider in categoryVm.providers")
+        .slick-content
+          .provider-card
+            .img(style="background-image: url('{{provider.imagen}}')")
+            .provider-card-footer
+              .nombre {{provider.razon_social}}
+              .horario {{provider.horario}}

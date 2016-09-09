@@ -10,16 +10,11 @@
                               $ionicPopup,
                               $state,
                               $scope,
-                              LoginService,
-                              $rootScope) {
+                              LoginService) {
     var registerVm = this;
     registerVm.register = register;
     registerVm.registerForm = {};
     registerVm.loginWithFB = LoginService.loginWithFB;
-
-/*    $rootScope.$on('auth:login-success', function(ev, user) {
-       debugger;
-    });*/
 
     function register() {
       $ionicLoading.show({

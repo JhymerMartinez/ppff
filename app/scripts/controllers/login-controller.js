@@ -12,30 +12,15 @@
                             $ionicPopup,
                             $auth,
                             $ionicHistory,
+                            APP,
                             LoginService) {
     var loginVm = this;
     loginVm.login = login;
     loginVm.logout = logout;
     loginVm.loginWithFB = LoginService.loginWithFB;
     loginVm.loginForm = {};
-    var successState = 'app.playlists';
+    var successState = APP.successState;
     var loginState = 'login';
-
-    $rootScope.$on('auth:validation-success', function () {
-      $state.go(successState);
-    });
-
-/*    $rootScope.$on('auth:login-success', function(ev, user) {
-       debugger;
-    });*/
-
-    function load(){
-      $auth.validateUser().then(function(){
-        $state.go(successState);
-      });
-    }
-
-    load();
 
     function login() {
       $ionicLoading.show({

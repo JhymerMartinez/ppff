@@ -1,3 +1,22 @@
-.bar-header-transparent {
-  display: none;
+.bar-header {
+  .back-button {
+    margin-left: 0;
+  }
+}
+
+.bar-stable.bar.bar-header {
+  background: $base-yellow;
+
+  .alt-logo {
+    height: 35px;
+    margin-top: 5px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/logo-blanco.png');
+  }
+
+  .ion-navicon {
+    color: $white;
+  }
 }

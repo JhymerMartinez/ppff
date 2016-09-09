@@ -7,7 +7,10 @@
     'porttare.controllers',
     'porttare.services',
     'porttare.directives',
-    'ngCordova'
+    'porttare.translations',
+    'ngCordova',
+    'slickCarousel',
+    'ngFileUpload'
   ])
 
   .run(function($ionicPlatform) {
@@ -27,7 +30,6 @@
   })
 
   .config(function($stateProvider, $urlRouterProvider) {
-    debugger;
     $stateProvider
 
     .state('login', {
@@ -71,12 +73,11 @@
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'templates/menu.html',
+      templateUrl: 'templates/menu/menu.html',
       controller: 'AppCtrl',
       //only logged users will allow to go to /app/*
       resolve: {
           currentUser: function($auth, $state) {
-            debugger;
             $auth.validateUser().then(function(user){
               return user;
             }, function(){
@@ -85,40 +86,117 @@
           }
         }
     })
-
-    .state('app.search', {
-      url: '/search',
+    .state('app.categories', {
+      url: '/categories',
+      abstract: true
+    })
+    .state('app.categories.index', {
+      url: '/',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/search.html'
+        'menuContent@app': {
+          templateUrl: 'templates/category/index.html',
+          controller: 'CategoriesController',
+          controllerAs: 'categoryVm',
+          resolve: {
+            data: function (CategoriesService, $q, $ionicLoading, $ionicPopup) {
+              $ionicLoading.show({
+                template: 'cargando...'
+              });
+              return CategoriesService.getCategories()
+                .then(function success(res) {
+                  $ionicLoading.hide();
+                  return res.data;
+                }, function error(res) {
+                  $ionicLoading.hide();
+                  var message = res.data.error ? res.data.error :
+                    'Hubo un error, intentalo nuevamente.';
+                  $ionicPopup.alert({
+                    title: 'Error',
+                    template: message
+                  });
+                });
+            }
+          }
         }
       }
     })
-
-    .state('app.browse', {
-        url: '/browse',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/browse.html'
-          }
-        }
-      })
-      .state('app.playlists', {
-        url: '/playlists',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
-          }
-        }
-      })
-
-    .state('app.single', {
-      url: '/playlists/:playlistId',
+    .state('app.categories.show', {
+      url: '/:id',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
+        'menuContent@app': {
+          templateUrl: 'templates/category/show.html',
+          controller: 'CategoryController',
+          controllerAs: 'categoryVm',
+          resolve: {
+            data: function () {
+
+              //TODO remove this when we have the endpoint
+              var providers = [
+                {id: 1, 'razon_social': 'Empresa 1', imagen: '../images/ionic.png'},
+                {id: 2, 'razon_social': 'Empresa 2', imagen: '../images/ionic.png'},
+                {id: 3, 'razon_social': 'Empresa 3', imagen: '../images/ionic.png'},
+                {id: 4, 'razon_social': 'Empresa 4', imagen: '../images/ionic.png'},
+                {id: 5, 'razon_social': 'Empresa 5', imagen: '../images/ionic.png'}
+              ];
+              var responsedata = {
+                category: {
+                  titulo: 'Medicinas',
+                  imagen: '../images/bg.png',
+                  descripcion: 'Paracetamol, aspirinas, pastillas de dolor ' +
+                    'de cabeza y muchas más, en un sólo lugar'
+                },
+                providers: providers
+              };
+
+              return responsedata;
+            }
+          }
+        }
+      },
+      resolve: {
+        data: function () {
+
+          //TODO remove this when we have the endpoint
+          var providers = [
+            {id: 1, 'razon_social': 'Empresa 1', imagen: '../images/bg.png'},
+            {id: 2, 'razon_social': 'Empresa 2', imagen: '../images/bg.png'},
+            {id: 3, 'razon_social': 'Empresa 3', imagen: '../images/bg.png'},
+            {id: 4, 'razon_social': 'Empresa 4', imagen: '../images/bg.png'},
+            {id: 5, 'razon_social': 'Empresa 5', imagen: '../images/bg.png'}
+          ];
+          var responsedata = {
+            category: {
+              titulo: 'Medicinas',
+              imagen: '../images/bg.png'
+            },
+            providers: providers
+          };
+
+          return responsedata;
+        }
+      }
+    })
+    .state('app.categories.provider', {
+      url: '/:category_id/provider/:id',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/show.html',
+          controller: 'ProviderDetailController',
+          controllerAs: 'providerDetVm',
+        }
+      }
+    })
+    .state('app.items', {
+      url: '/items',
+      abstract: true
+    })
+    .state('app.items.index', {
+      url: '/',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/item/items.html',
+          controller: 'ItemsController',
+          controllerAs: 'itemsVm'
         }
       }
     })
@@ -131,10 +209,47 @@
           controllerAs: 'mapVm',
         }
       }
+    })
+    .state('app.provider', {
+      url: '/provider',
+      abstract: true
+    })
+    .state('app.provider.welcome', {
+      url: '/welcome',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/welcome.html',
+          controller: 'ProviderController',
+          controllerAs: 'providerVm1',
+        }
+      }
+    })
+    .state('app.provider.new', {
+      url: '/new',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/provider/new.html',
+          controller: 'ProviderController',
+          controllerAs: 'providerVm',
+        }
+      }
+    })
+    .state('app.products', {
+      url: '/products',
+      abstract: true
+    })
+    .state('app.products.index', {
+      url: '/',
+      views: {
+        'menuContent@app': {
+          templateUrl: 'templates/products/index.html',
+          controller: 'ProductsController',
+          controllerAs: 'productsVm',
+        }
+      }
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise(function ($injector, $location) {
-      debugger;
       if (isResetPassword($location.absUrl())) {
         return '/reset';
       } else {

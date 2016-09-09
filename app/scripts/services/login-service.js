@@ -5,7 +5,7 @@
     .module('porttare.services')
     .factory('LoginService', LoginService);
 
-  function LoginService($auth, $state, $ionicPopup) {
+  function LoginService($auth, $state, $ionicPopup, APP) {
 
     var service = {
       loginWithFB: loginWithFB
@@ -14,14 +14,12 @@
     return service;
 
     function loginWithFB() {
-      var successState = 'app.playlists';
+      var successState = APP.successState;
       $auth.authenticate('facebook')
         .then(function () {
-          debugger;
           $state.go(successState);
         })
         .catch(function () {
-          debugger;
           $ionicPopup.alert({
             title: 'Error',
             template: 'Hubo un error, intentalo nuevamente.'

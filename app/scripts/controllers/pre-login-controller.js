@@ -4,17 +4,18 @@ angular
   .module('porttare.controllers')
   .controller('PreController', PreController);
 
-function PreController($auth, $state, $ionicPopup, $window, LoginService, $rootScope) {
+function PreController($auth,
+                      $state,
+                      $ionicPopup,
+                      $localStorage,
+                      LoginService,
+                      APP) {
   var preVm = this;
   preVm.loginWithFB = LoginService.loginWithFB;
-  var successState = 'app.playlists';
-
-/*    $rootScope.$on('auth:login-success', function(ev, user) {
-       debugger;
-    });*/
+  var successState = APP.successState;
 
   function load(){
-    if ($window.localStorage && !$window.localStorage.getItem('hasViewedTutorial')) {
+    if (!$localStorage.get('hasViewedTutorial')) {
       $state.go('intro');
     }
     $auth.validateUser().then(function(){
