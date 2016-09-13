@@ -13,7 +13,10 @@
         $window,
         $ionicLoading,
         deferredLogout,
-        deferIonicHistory;
+        deferIonicHistory,
+        LoginService,
+        deferLoginWithFB,
+        APP;
 
     beforeEach(module('porttare.controllers'));
 
@@ -25,6 +28,7 @@
       deferredLogin     = $q.defer();
       deferredLogout    = $q.defer();
       deferIonicHistory = $q.defer();
+      deferLoginWithFB  = $q.defer();
       $ionicPopup       = {
         alert: sinon.stub().returns(deferredLogin.promise),
         show: sinon.stub().returns(deferredLogin.promise)
@@ -43,6 +47,12 @@
                           .returns(deferredLogout.promise)
       };
       $window           = _$window_;
+      LoginService = {
+        loginWithFB: sinon.stub().returns(deferLoginWithFB.promise)
+      };
+      APP = {
+        successState: 'app.categories.index'
+      };
     }));
 
     describe('#login', function() {
@@ -55,7 +65,9 @@
           '$state': $state,
           '$auth': $auth,
           '$window': $window,
-          '$scope': $scope
+          '$scope': $scope,
+          'LoginService': LoginService,
+          'APP': APP
         });
         $rootScope = _$rootScope_;
         $window.localStorage.setItem('hasViewedTutorial','true');
@@ -72,7 +84,7 @@
       });
 
       describe('when the login is executed,', function() {
-        var successState = 'app.playlists';
+        var successState = 'app.categories.index';
 
         it('if successful, should change state', function() {
           deferredLogin.resolve();
@@ -88,12 +100,6 @@
           sinon.assert.calledOnce($ionicPopup.alert);
         });
 
-        it('if already authenticated, change state', function () {
-          $rootScope.$emit('auth:validation-success');
-
-          sinon.assert.alwaysCalledWithExactly($state.go, successState);
-        });
-
       });
 
     });
@@ -106,7 +112,9 @@
           '$state': $state,
           '$auth': $auth,
           '$ionicHistory': $ionicHistory,
-          '$scope': $scope
+          '$scope': $scope,
+          'LoginService': LoginService,
+          'APP': APP
         });
         $rootScope = _$rootScope_;
         controller.logout();

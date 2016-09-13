@@ -17,8 +17,7 @@
 
     $rootScope.$on('$stateChangeSuccess', function(){
       // Check if user is authenticated
-      if (!$state.includes('app') && !$state.is('reset')) {
-        debugger;
+      if (!$state.includes('app')) {
         $auth.validateUser()
           .then(function(){
             $ionicLoading.hide();
@@ -28,11 +27,6 @@
             $ionicLoading.hide();
           });
       } else {
-        debugger;
-        if ($state.is('reset')) {
-          debugger;
-          $state.go(successState);
-        }
         $ionicLoading.hide();
       }
     });
