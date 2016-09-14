@@ -1,0 +1,12 @@
+ion-view(
+  view-title='{{::("globals.error"|translate)}}'
+)
+  ion-content(class="error-page")
+    .row
+      .moviggo-logo-2.branding-logo
+    .row.error-text-content
+      .list.list-inset.error-text-content
+        .error-text {{::errVm.message}}
+    .row
+      .list.list-inset.list--centered
+        .button.button-primary(ng-click="errVm.redirectToHome()") {{::("globals.index"|translate)}}

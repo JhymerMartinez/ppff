@@ -44,7 +44,12 @@ function routes($stateProvider, $urlRouterProvider) {
     controller: 'PreController',
     controllerAs: 'preVm'
   })
-
+  .state('error', {
+    url: '/error',
+    templateUrl: 'templates/error/error.html',
+    controller: 'ErrorController',
+    controllerAs: 'errVm'
+  })
   .state('app', {
     url: '/app',
     abstract: true,
@@ -224,6 +229,7 @@ function routes($stateProvider, $urlRouterProvider) {
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise(function ($injector, $location) {
+    debugger;
     if (isResetPassword($location.absUrl())) {
       return '/reset';
     } else {
