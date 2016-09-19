@@ -14,7 +14,8 @@
         password: 'Contraseña',
         login: 'Iniciar Sesión',
         forgotPassword: '¿Olvidaste tu contraseña?',
-        continueWithFacebook: 'Continuar con facebook'
+        continueWithFacebook: 'Continuar con Facebook',
+        unauthorized: 'No Autorizado'
       },
       menu: {
         category: 'Categorías',
@@ -77,6 +78,26 @@
         showCategory: 'Lista de Categorías',
         newProvider: 'Nuevo Proveedor'
 
+      },
+      client: {
+        formLegend: 'Datos cliente',
+        client: 'Cliente',
+        clients: 'Clientes',
+        listOfClients: 'Lista de clientes',
+        successClientSave: 'Cliente guardado éxitosamente',
+        successUpdateClient: 'Cliente actualizado éxitosamente',
+        notas: 'Notas',
+        ruc: 'Ruc',
+        nombres: 'Nombres',
+        direccion: 'Dirección',
+        telefono: 'Teléfono',
+        email: 'email'
+      },
+      password: {
+        updatePassword: 'Actualizar contraseña',
+        current: 'Contraseña',
+        confirm: 'Confirmar contraseña',
+        update: 'Actualizar'
       }
     });
 
