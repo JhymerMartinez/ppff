@@ -23,12 +23,7 @@
     var loginState = 'login';
 
     $rootScope.$on('auth:password-change-error', function (event, data) {
-      debugger;
       resetVm.messages = data.errors;
-      /*$ionicPopup.alert({
-        title: 'Error',
-        template: data.errors.join(', ')
-      });*/
     });
 
     $rootScope.$on('auth:password-change-success', function () {
