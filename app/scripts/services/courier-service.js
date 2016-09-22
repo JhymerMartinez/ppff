@@ -4,7 +4,7 @@
     .module('porttare.services')
     .factory('CourierService', CourierService);
 
-  function CourierService($http, ENV) {
+  function CourierService(CommonService) {
 
     var service = {
       createNewCourier: createNewCourier
@@ -13,11 +13,7 @@
     return service;
 
     function createNewCourier(data) {
-      return $http({
-        method: 'POST',
-        url: ENV.apiHost + '/api/courier/profile',
-        data: data
-      });
+      return CommonService.createNewElement(data, '/api/courier/profile');
     }
 
   }

@@ -62,12 +62,12 @@
           });
         },
         function error(resp) {
-          if (resp.data.errors) {
-            providerVm.messages = resp.data.errors;
+          if (resp.errors) {
+            providerVm.messages = resp.errors;
           } else {
             $ionicPopup.alert({
               title: 'Error',
-              template: resp.data.error ? resp.data.error :
+              template: resp.error ? resp.error :
                 'Hubo un error, intentalo nuevamente.'
             });
           }
