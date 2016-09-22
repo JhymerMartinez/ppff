@@ -5,7 +5,7 @@
     .module('porttare.controllers')
     .controller('SiteController', SiteController);
 
-  function SiteController($rootScope, $ionicLoading, $auth, $state, $location, APP) {
+  function SiteController($rootScope, $ionicLoading) {
 
     $rootScope.$on('$stateChangeStart', function(){
       $ionicLoading.show({

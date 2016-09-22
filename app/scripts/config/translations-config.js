@@ -22,7 +22,8 @@
         location: 'Ubicación',
         provider: 'Proveedor',
         products: 'Productos',
-        logout: 'Cerrar sesión'
+        logout: 'Cerrar sesión',
+        courier: 'Mensajero'
       },
       provider: {
         formLegend: 'Datos nuevo proveedor',
@@ -44,6 +45,21 @@
           creditCard: 'Tarjeta de crédito'
         }
       },
+      courier: {
+        successCourierSave: 'Mensajero guardado éxitosamente',
+        welcomeTitle: 'Conviértete en mensajero',
+        welcomeDescription: 'Con moviggo puedes enviar productos y convertirte en mensajero',
+        newCourierTitle: 'Nuevo Mensajero',
+        formLegend: 'Datos nuevo mensajero',
+        names: 'Nombre completos',
+        ruc: 'Cedula/RUC/Pasaporte',
+        phone: 'Número de teléfono',
+        email: 'Correo electrónico',
+        location: 'Ubicación',
+        mobilization: 'Tipo de medio de movilización',
+        birthdate: 'Fecha de nacimiento',
+        license: 'Licencia de conducir'
+      },
       globals: {
         new: 'Nuevo',
         save: 'Guardar',
@@ -57,7 +73,11 @@
         leftData: 'Faltan datos',
         error: 'Error',
         or: 'o',
-        index: 'Inicio'
+        index: 'Inicio',
+        loading: 'Cargando',
+        sending: 'Enviando',
+        start: 'Empezar',
+        sendRequest: 'Enviar solicitud'
       },
       item: {
         item: 'Artículo',

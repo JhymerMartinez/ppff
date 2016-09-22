@@ -91,7 +91,7 @@ function routes($stateProvider, $urlRouterProvider) {
         resolve: {
           data: function (CategoriesService, $q, $ionicLoading, $ionicPopup) {
             $ionicLoading.show({
-              template: 'cargando...'
+              template: '{{::("globals.loading"|translate)}}'
             });
             return CategoriesService.getCategories()
               .then(function success(res) {
@@ -100,7 +100,7 @@ function routes($stateProvider, $urlRouterProvider) {
               }, function error(res) {
                 $ionicLoading.hide();
                 var message = res.data.error ? res.data.error :
-                  'Hubo un error, intentalo nuevamente.';
+                  '{{::("globals.pleaseTryAgain"|translate)}}';
                 $ionicPopup.alert({
                   title: 'Error',
                   template: message
@@ -119,28 +119,26 @@ function routes($stateProvider, $urlRouterProvider) {
         controller: 'CategoryController',
         controllerAs: 'categoryVm',
         resolve: {
-          data: function () {
+          data: function ($ionicLoading, $stateParams, $ionicPopup, CategoryService) {
+            $ionicLoading.show({
+              template: '{{::("globals.loading"|translate)}}'
+            });
 
-            //TODO remove this when we have the endpoint
-            var providers = [
-              {id: 1, 'razon_social': 'Empresa 1', imagen: '../images/ionic.png'},
-              {id: 2, 'razon_social': 'Empresa 2', imagen: '../images/ionic.png'},
-              {id: 3, 'razon_social': 'Empresa 3', imagen: '../images/ionic.png'},
-              {id: 4, 'razon_social': 'Empresa 4', imagen: '../images/ionic.png'},
-              {id: 5, 'razon_social': 'Empresa 5', imagen: '../images/ionic.png'}
-            ];
-            var responsedata = {
-              category: {
-                id:1,
-                titulo: 'Medicinas',
-                imagen: '../images/bg.png',
-                descripcion: 'Paracetamol, aspirinas, pastillas de dolor ' +
-                  'de cabeza y muchas más, en un sólo lugar'
-              },
-              providers: providers
-            };
+            var categoryId = $stateParams.id;
 
-            return responsedata;
+            return CategoryService.getCategoryProviders(categoryId)
+              .then(function success(res) {
+                $ionicLoading.hide();
+                return res.data;
+              }, function error(res) {
+                $ionicLoading.hide();
+                var message = res.data.error ? res.data.error :
+                  '{{::("globals.pleaseTryAgain"|translate)}}';
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: message
+                });
+              });
           }
         }
       }
@@ -152,7 +150,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/show.html',
         controller: 'ProviderDetailController',
-        controllerAs: 'providerDetVm',
+        controllerAs: 'providerDetVm'
       }
     }
   })
@@ -190,7 +188,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent': {
         templateUrl: 'templates/map/map.html',
         controller: 'MapController',
-        controllerAs: 'mapVm',
+        controllerAs: 'mapVm'
       }
     }
   })
@@ -204,7 +202,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/welcome.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm1',
+        controllerAs: 'providerVm1'
       }
     }
   })
@@ -214,7 +212,7 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/provider/new.html',
         controller: 'ProviderController',
-        controllerAs: 'providerVm',
+        controllerAs: 'providerVm'
       }
     }
   })
@@ -228,7 +226,31 @@ function routes($stateProvider, $urlRouterProvider) {
       'menuContent@app': {
         templateUrl: 'templates/products/index.html',
         controller: 'ProductsController',
-        controllerAs: 'productsVm',
+        controllerAs: 'productsVm'
+      }
+    }
+  })
+  .state('app.courier', {
+    url: '/courier',
+    abstract: true
+  })
+  .state('app.courier.welcome', {
+    url: '/welcome',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/courier/welcome.html',
+        controller: 'CourierController',
+        controllerAs: 'courierWelVm'
+      }
+    }
+  })
+  .state('app.courier.new', {
+    url: '/new',
+    views: {
+      'menuContent@app': {
+        templateUrl: 'templates/courier/new.html',
+        controller: 'CourierController',
+        controllerAs: 'courierVm'
       }
     }
   });
