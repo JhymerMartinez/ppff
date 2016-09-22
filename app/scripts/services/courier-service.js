@@ -1,7 +1,5 @@
 (function () {
-
   'use strict';
-
   angular
     .module('porttare.services')
     .factory('CourierService', CourierService);
